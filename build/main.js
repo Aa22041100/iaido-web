@@ -804,9 +804,10 @@ var BaseApp = (function () {
             // JuicyLauncher setup
             utils.setupLang();
             utils.setupGoogleAnalytics();
-            utils.setupOneSignal();
+            // utils.setupOneSignal();
             // check force or soft update
-            _this.checkVersion();
+            // this.checkVersion();
+            _this.onAppLoaded();
         });
     }
     // Version checking	
@@ -850,9 +851,10 @@ var BaseApp = (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]) === "function" && _a || Object)
     ], BaseApp.prototype, "nav", void 0);
     return BaseApp;
+    var _a;
 }());
 
 //# sourceMappingURL=base-app.js.map

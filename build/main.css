@@ -25707,3 +25707,24 @@ page-new-version .skip-btn {
   margin-top: 20px;
   width: 150px;
 }
+
+page-home .section-header-container {
+  background-color: lightgray;
+  color: black;
+}
+
+page-home .section-header-container:not(:first-child) {
+  margin-top: 1rem;
+}
+
+page-home .submit-button-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+page-home .submit-button-container .submit-button {
+  padding: 1rem 4rem;
+  background-color: #14CC65;
+  border-radius: 25rem;
+  color: white;
+}

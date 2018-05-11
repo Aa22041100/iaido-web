@@ -254,19 +254,33 @@ var HomePage = (function (_super) {
         _this.nav = nav;
         _this.utils = utils;
         _this.name = 'HomePage';
+        _this.gradingTestModel = {
+            name_zh: "",
+            name_en: "",
+            gender: "",
+            tel: "",
+            email: "",
+            grading_level: "",
+            grading_date: "",
+        };
         __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].DEBUG_VERBOSE && console.log('HomePage constructor');
         return _this;
     }
+    //	=====================
+    //	|	UI Callbacks	|
+    //	=====================
+    //#region UI Callbacks
+    HomePage.prototype.onSubmitClicked = function () {
+        console.log(this.gradingTestModel);
+    };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"D:\Work\Salf\HKIaido\iaido-app\src\pages\home\home.html"*/'<common-header [title]="\'PAGE.HOME\' | translate"></common-header>\n\n<ion-content padding>\n	<h2>Welcome to JuicyLauncher!</h2>\n</ion-content>'/*ion-inline-end:"D:\Work\Salf\HKIaido\iaido-app\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"D:\Work\Salf\HKIaido\iaido-app\src\pages\home\home.html"*/'<common-header title="級試報名表格 (Grading Test Application)"></common-header>\n\n<ion-content padding>\n	<ion-list>\n		<!-- Name Section -->\n		<ion-list-header class="section-header-container">\n			姓名 Name\n		</ion-list-header>\n		<ion-item>\n			<ion-label floating>\n				中文姓名\n			</ion-label>\n			<ion-input type="text" [(ngModel)]="gradingTestModel.name_zh"></ion-input>\n		</ion-item>\n		<ion-item>\n			<ion-label floating>\n				English Name\n			</ion-label>\n			<ion-input type="text" [(ngModel)]="gradingTestModel.name_en"></ion-input>\n		</ion-item>\n		<!-- End of Name Section -->\n\n		<!-- Gender Section -->\n		<ion-list-header class="section-header-container">\n			性別 Gender\n		</ion-list-header>\n		<div radio-group [(ngModel)]="gradingTestModel.gender">\n			<ion-item>\n				<ion-label>男 Male</ion-label>\n				<ion-radio value="M"></ion-radio>\n			</ion-item>\n			<ion-item>\n				<ion-label>女 Female</ion-label>\n				<ion-radio value="F"></ion-radio>\n			</ion-item>\n		</div>\n		<!-- End of Gender Section -->\n\n		<!-- Contact Section -->\n		<ion-list-header class="section-header-container">\n			聯絡電話 Contact Number\n		</ion-list-header>\n		<ion-item>\n			<ion-label floating>\n				電話號碼 Tel No.\n			</ion-label>\n			<ion-input type="tel" [(ngModel)]="gradingTestModel.tel"></ion-input>\n		</ion-item>\n		<!-- End of Contact Section-->\n\n		<!-- Contact Email Section -->\n		<ion-list-header class="section-header-container">\n			電郵 Contact Email\n		</ion-list-header>\n		<ion-item>\n			<ion-label floating>\n				電郵 Email\n			</ion-label>\n			<ion-input type="email" [(ngModel)]="gradingTestModel.email"></ion-input>\n		</ion-item>\n		<!-- End of Contact Email Section -->\n\n		<!-- Grading Level Section -->\n		<ion-list-header class="section-header-container">\n			考試級數 Grading Test Level\n		</ion-list-header>\n		<ion-item>\n			<ion-label floating>\n				考試級數 Grading Test Level\n			</ion-label>\n			<ion-input type="text" [(ngModel)]="gradingTestModel.grading_level"></ion-input>\n		</ion-item>\n		<!-- End of Grading Level Section -->\n\n		<!-- Grading Test Date Section -->\n		<ion-list-header class="section-header-container">\n			考試日期 Grading Test Date\n		</ion-list-header>\n		<ion-item>\n			<ion-label floating>考試日期 Grading Test Date</ion-label>\n			<ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="gradingTestModel.grading_date"></ion-datetime>\n		</ion-item>\n		<!-- End of Grading Test Date Section -->\n\n		<!-- Submit Button -->\n		<div class="submit-button-container">\n			<button class="submit-button" (click)="onSubmitClicked ()">提交 Submit</button>\n		</div>\n		<!-- End of Submit Button -->\n	</ion-list>\n</ion-content>'/*ion-inline-end:"D:\Work\Salf\HKIaido\iaido-app\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__["a" /* Utils */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ViewController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__["a" /* Utils */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__["a" /* Utils */]) === "function" && _d || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c, _d;
 }(__WEBPACK_IMPORTED_MODULE_2__core_base_page__["a" /* BasePage */]));
 
 //# sourceMappingURL=home.js.map
