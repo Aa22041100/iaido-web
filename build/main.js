@@ -1,17 +1,5 @@
 webpackJsonp([1],{
 
-/***/ 106:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(425);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__api__["a"]; });
-
-
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
 /***/ 120:
 /***/ (function(module, exports) {
 
@@ -54,101 +42,13 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 214:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewVersionPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_utils__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers__ = __webpack_require__(106);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Modal page for display latest versions returned from API
- */
-var NewVersionPage = (function () {
-    function NewVersionPage(platform, view, params, api, utils) {
-        var _this = this;
-        this.platform = platform;
-        this.view = view;
-        this.params = params;
-        this.api = api;
-        this.utils = utils;
-        this.version_response = null;
-        this.force_upgrade = false;
-        this.show_release_notes = false;
-        this.show_release_notes_icon = 'arrow-dropdown-circle';
-        console.log('NewVersionPage > params', this.params.data);
-        this.version_response = this.params.data.version_response;
-        this.force_upgrade = (this.version_response.force_upgrade) ? !!this.version_response.force_upgrade : false;
-        // disable hardware back button when force upgrade
-        console.log('NewVersionPage > force_upgrade = ' + this.force_upgrade);
-        if (this.force_upgrade) {
-            this.platform.registerBackButtonAction(function () { });
-        }
-        // get App download URL from API
-        this.api.getAppConfig().then(function (data) {
-            if (_this.utils.currentOS() == 'ios') {
-                _this.download_url = data['ios_url'];
-            }
-            else if (_this.utils.currentOS() == 'android') {
-                _this.download_url = data['android_url'];
-            }
-        });
-    }
-    // Toggle release notes
-    NewVersionPage.prototype.onClickReleaseNotes = function () {
-        this.show_release_notes = !this.show_release_notes;
-        this.show_release_notes_icon = this.show_release_notes ? 'arrow-dropup-circle' : 'arrow-dropdown-circle';
-    };
-    // Dismiss this modal / popup
-    NewVersionPage.prototype.onClickSkipBtn = function (data) {
-        var _this = this;
-        if (!this.force_upgrade) {
-            var key_1 = 'VERSION_CHECK_FROM_' + this.version_response.curr_version + '_TO_' + this.version_response.latest_version;
-            this.utils.setLocal(key_1, true).then(function () {
-                console.log('Finish setting to key: ' + key_1);
-                _this.view.dismiss(data);
-            });
-        }
-    };
-    NewVersionPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-new-version',template:/*ion-inline-start:"D:\Work\Salf\HKIaido\iaido-app\src\core\components\new-version\new-version.html"*/'<ion-content padding>\n\n	<div class="container">\n\n		<!-- logo -->\n		<!--<img src="assets/img/logo.png" />-->\n\n		<!-- description -->\n		<h5>New Version Available</h5>\n		<p>There is a newer version available for download.<br/>Please update the app to continue.</p>\n		<p>Latest Version: <strong>{{version_response.latest_version}}</strong></p>\n		<p>Current Version: <strong>{{version_response.curr_version}}</strong></p>\n		\n		<!-- release notes -->\n		<ion-list *ngIf="version_response.new_versions">\n			<ion-list-header (click)="onClickReleaseNotes()">\n				Release Notes\n				<ion-icon item-right name="{{ show_release_notes_icon }}"></ion-icon>\n			</ion-list-header>\n			<div *ngIf="show_release_notes">\n				<ion-item *ngFor="let version of version_response.new_versions">\n					<h2>Version: {{version.code}} ({{version.publish_date}})</h2>\n					<br/>\n					<div [innerHTML]="version.release_notes"></div>\n				</ion-item>\n			</div>\n		</ion-list>\n\n		<!-- force upgrade -->\n		<div *ngIf="force_upgrade">\n			<a class="download-btn" ion-button href="{{ download_url }}" target="_blank" round>Update</a>\n		</div>\n		\n		<!-- soft upgrade -->\n		<div *ngIf="!force_upgrade">\n			<a class="download-btn" ion-button *ngIf="download_url" href="{{ download_url }}" target="_blank" round>Update</a>\n			<br/>\n			<button ion-button class="skip-btn" (click)="onClickSkipBtn()" round color="light">Skip</button>\n		</div>\n\n	</div>\n\n</ion-content>'/*ion-inline-end:"D:\Work\Salf\HKIaido\iaido-app\src\core\components\new-version\new-version.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__providers__["a" /* Api */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_utils__["a" /* Utils */]])
-    ], NewVersionPage);
-    return NewVersionPage;
-}());
-
-//# sourceMappingURL=new-version.js.map
-
-/***/ }),
-
-/***/ 334:
+/***/ 333:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(335);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(353);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(352);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -162,7 +62,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Utils; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_toPromise__ = __webpack_require__(389);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_toPromise__ = __webpack_require__(388);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_toPromise__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_app_version__ = __webpack_require__(167);
@@ -174,7 +74,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ngx_translate_core__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__config__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_lodash__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_lodash__ = __webpack_require__(401);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -543,7 +443,7 @@ var Utils = (function () {
 
 /***/ }),
 
-/***/ 353:
+/***/ 352:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -554,23 +454,23 @@ var Utils = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(354);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common_http__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_storage__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ngx_translate_core__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ngx_translate_http_loader__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ngx_translate_http_loader__ = __webpack_require__(422);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_app_version__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_google_analytics__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_network__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_themeable_browser__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_onesignal__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(423);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__core_components_new_version_new_version__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__core_components_new_version_new_version__ = __webpack_require__(427);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__core_providers_utils__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__core_pipes_escape_html__ = __webpack_require__(428);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__core_components_inapp_href_inapp_href__ = __webpack_require__(429);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -688,180 +588,7 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 423:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_base_app__ = __webpack_require__(424);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers__ = __webpack_require__(106);
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var MyApp = (function (_super) {
-    __extends(MyApp, _super);
-    function MyApp(platform, api, utils) {
-        var _this = _super.call(this, platform, api, utils) || this;
-        __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].DEBUG_VERBOSE && console.log('MyApp constructor');
-        return _this;
-    }
-    // override parent
-    MyApp.prototype.onAppLoaded = function () {
-        // set rootpage only when the app is ready
-        __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].DEBUG_VERBOSE && console.log('MyApp onAppLoaded');
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].START_PAGE;
-    };
-    MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\Work\Salf\HKIaido\iaido-app\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\Work\Salf\HKIaido\iaido-app\src\app\app.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_5__providers__["a" /* Api */], __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__["a" /* Utils */]])
-    ], MyApp);
-    return MyApp;
-}(__WEBPACK_IMPORTED_MODULE_2__core_base_app__["a" /* BaseApp */]));
-
-//# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 424:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_new_version_new_version__ = __webpack_require__(214);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-/**
- * Base class for application, with common workflow when upon app start
- * @Component to be defined in child classes
- **/
-
-
-
-
-var BaseApp = (function () {
-    function BaseApp(platform, api, utils) {
-        var _this = this;
-        this.platform = platform;
-        this.api = api;
-        this.utils = utils;
-        __WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].DEBUG_VERBOSE && console.log('BaseApp constructor');
-        // override Android hardware back button
-        platform.registerBackButtonAction(function () {
-            // check current page name
-            var page = _this.nav.root;
-            if (!_this.nav.canGoBack() && page.name == __WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].ROOT_PAGE_NAME) {
-                // show Exit App confirmation box
-                _this.utils.showConfirm('', _this.utils.instantLang('MSG.CONFIRM_EXIT_APP'), function () {
-                    _this.platform.exitApp();
-                });
-            }
-            else {
-                // normal go back navigation
-                _this.nav.pop();
-            }
-        });
-        platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            _this.utils.setupStatusbar();
-            // JuicyLauncher setup
-            utils.setupLang();
-            utils.setupGoogleAnalytics();
-            // utils.setupOneSignal();
-            // check force or soft update
-            // this.checkVersion();
-            _this.onAppLoaded();
-        });
-    }
-    // Version checking	
-    BaseApp.prototype.checkVersion = function () {
-        var _this = this;
-        this.api.getVersions().then(function (data) {
-            // Prepare modal or popover, based on whether need to force upgrade
-            if (data) {
-                if (data.force_upgrade) {
-                    _this.utils.showModal(__WEBPACK_IMPORTED_MODULE_3__components_new_version_new_version__["a" /* NewVersionPage */], { version_response: data });
-                }
-                else {
-                    // check whether user has dismissed version upgrade notice before
-                    var latest_version_code = data.latest_version;
-                    var key = 'VERSION_CHECK_FROM_' + data.curr_version + '_TO_' + latest_version_code;
-                    _this.utils.getLocal(key, false).then(function (skipped) {
-                        if (!skipped) {
-                            _this.utils.showModal(__WEBPACK_IMPORTED_MODULE_3__components_new_version_new_version__["a" /* NewVersionPage */], { version_response: data });
-                        }
-                    });
-                }
-            }
-            // indicate the app is successfully loaded
-            _this.onAppLoaded();
-        }).catch(function (err) {
-            // version cannot be found from server, but still proceed to init the app
-            _this.onAppLoaded();
-        });
-    };
-    // inherit this function from child class (e.g. MyApp)
-    BaseApp.prototype.onAppLoaded = function () {
-        __WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].DEBUG_VERBOSE && console.log('BaseApp onAppLoaded');
-    };
-    // [For App with Tab / Sidemenu root only]
-    BaseApp.prototype.openPage = function (page) {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        if (this.nav && page) {
-            this.nav.setRoot(page);
-        }
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]) === "function" && _a || Object)
-    ], BaseApp.prototype, "nav", void 0);
-    return BaseApp;
-    var _a;
-}());
-
-//# sourceMappingURL=base-app.js.map
-
-/***/ }),
-
-/***/ 425:
+/***/ 402:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -869,7 +596,7 @@ var BaseApp = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_providers_utils__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_base_service__ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_base_service__ = __webpack_require__(403);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -899,9 +626,21 @@ var Api = (function (_super) {
         var _this = _super.call(this, platform, utils) || this;
         // override API URL prefix and anonymous API key
         //protected api_prefix: string = 'http://localhost/juicylauncher2_web/api';
-        _this.api_prefix = 'https://dev.juicyapphk.com/juicylauncher2_web/api';
+        _this.api_prefix = 'http://127.0.0.1/iaido-cms/api';
         return _this;
     }
+    /** Set API header jwt token */
+    Api.prototype.setJwtHeader = function (jwtToken) {
+        this.headers.append('Authorization', jwtToken);
+    };
+    /** API: Post init to activate this device */
+    Api.prototype.postInit = function (postParam) {
+        return this.post('/init', postParam);
+    };
+    /** API: Get member list from server database */
+    Api.prototype.getMemebers = function () {
+        return this.getRemote('/memeber');
+    };
     Api = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__core_providers_utils__["a" /* Utils */]])
@@ -913,7 +652,7 @@ var Api = (function (_super) {
 
 /***/ }),
 
-/***/ 426:
+/***/ 403:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1131,248 +870,248 @@ var BaseService = (function () {
 
 /***/ }),
 
-/***/ 427:
+/***/ 404:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 215,
-	"./af.js": 215,
-	"./ar": 216,
-	"./ar-dz": 217,
-	"./ar-dz.js": 217,
-	"./ar-kw": 218,
-	"./ar-kw.js": 218,
-	"./ar-ly": 219,
-	"./ar-ly.js": 219,
-	"./ar-ma": 220,
-	"./ar-ma.js": 220,
-	"./ar-sa": 221,
-	"./ar-sa.js": 221,
-	"./ar-tn": 222,
-	"./ar-tn.js": 222,
-	"./ar.js": 216,
-	"./az": 223,
-	"./az.js": 223,
-	"./be": 224,
-	"./be.js": 224,
-	"./bg": 225,
-	"./bg.js": 225,
-	"./bm": 226,
-	"./bm.js": 226,
-	"./bn": 227,
-	"./bn.js": 227,
-	"./bo": 228,
-	"./bo.js": 228,
-	"./br": 229,
-	"./br.js": 229,
-	"./bs": 230,
-	"./bs.js": 230,
-	"./ca": 231,
-	"./ca.js": 231,
-	"./cs": 232,
-	"./cs.js": 232,
-	"./cv": 233,
-	"./cv.js": 233,
-	"./cy": 234,
-	"./cy.js": 234,
-	"./da": 235,
-	"./da.js": 235,
-	"./de": 236,
-	"./de-at": 237,
-	"./de-at.js": 237,
-	"./de-ch": 238,
-	"./de-ch.js": 238,
-	"./de.js": 236,
-	"./dv": 239,
-	"./dv.js": 239,
-	"./el": 240,
-	"./el.js": 240,
-	"./en-au": 241,
-	"./en-au.js": 241,
-	"./en-ca": 242,
-	"./en-ca.js": 242,
-	"./en-gb": 243,
-	"./en-gb.js": 243,
-	"./en-ie": 244,
-	"./en-ie.js": 244,
-	"./en-nz": 245,
-	"./en-nz.js": 245,
-	"./eo": 246,
-	"./eo.js": 246,
-	"./es": 247,
-	"./es-do": 248,
-	"./es-do.js": 248,
-	"./es-us": 249,
-	"./es-us.js": 249,
-	"./es.js": 247,
-	"./et": 250,
-	"./et.js": 250,
-	"./eu": 251,
-	"./eu.js": 251,
-	"./fa": 252,
-	"./fa.js": 252,
-	"./fi": 253,
-	"./fi.js": 253,
-	"./fo": 254,
-	"./fo.js": 254,
-	"./fr": 255,
-	"./fr-ca": 256,
-	"./fr-ca.js": 256,
-	"./fr-ch": 257,
-	"./fr-ch.js": 257,
-	"./fr.js": 255,
-	"./fy": 258,
-	"./fy.js": 258,
-	"./gd": 259,
-	"./gd.js": 259,
-	"./gl": 260,
-	"./gl.js": 260,
-	"./gom-latn": 261,
-	"./gom-latn.js": 261,
-	"./gu": 262,
-	"./gu.js": 262,
-	"./he": 263,
-	"./he.js": 263,
-	"./hi": 264,
-	"./hi.js": 264,
-	"./hr": 265,
-	"./hr.js": 265,
-	"./hu": 266,
-	"./hu.js": 266,
-	"./hy-am": 267,
-	"./hy-am.js": 267,
-	"./id": 268,
-	"./id.js": 268,
-	"./is": 269,
-	"./is.js": 269,
-	"./it": 270,
-	"./it.js": 270,
-	"./ja": 271,
-	"./ja.js": 271,
-	"./jv": 272,
-	"./jv.js": 272,
-	"./ka": 273,
-	"./ka.js": 273,
-	"./kk": 274,
-	"./kk.js": 274,
-	"./km": 275,
-	"./km.js": 275,
-	"./kn": 276,
-	"./kn.js": 276,
-	"./ko": 277,
-	"./ko.js": 277,
-	"./ky": 278,
-	"./ky.js": 278,
-	"./lb": 279,
-	"./lb.js": 279,
-	"./lo": 280,
-	"./lo.js": 280,
-	"./lt": 281,
-	"./lt.js": 281,
-	"./lv": 282,
-	"./lv.js": 282,
-	"./me": 283,
-	"./me.js": 283,
-	"./mi": 284,
-	"./mi.js": 284,
-	"./mk": 285,
-	"./mk.js": 285,
-	"./ml": 286,
-	"./ml.js": 286,
-	"./mr": 287,
-	"./mr.js": 287,
-	"./ms": 288,
-	"./ms-my": 289,
-	"./ms-my.js": 289,
-	"./ms.js": 288,
-	"./mt": 290,
-	"./mt.js": 290,
-	"./my": 291,
-	"./my.js": 291,
-	"./nb": 292,
-	"./nb.js": 292,
-	"./ne": 293,
-	"./ne.js": 293,
-	"./nl": 294,
-	"./nl-be": 295,
-	"./nl-be.js": 295,
-	"./nl.js": 294,
-	"./nn": 296,
-	"./nn.js": 296,
-	"./pa-in": 297,
-	"./pa-in.js": 297,
-	"./pl": 298,
-	"./pl.js": 298,
-	"./pt": 299,
-	"./pt-br": 300,
-	"./pt-br.js": 300,
-	"./pt.js": 299,
-	"./ro": 301,
-	"./ro.js": 301,
-	"./ru": 302,
-	"./ru.js": 302,
-	"./sd": 303,
-	"./sd.js": 303,
-	"./se": 304,
-	"./se.js": 304,
-	"./si": 305,
-	"./si.js": 305,
-	"./sk": 306,
-	"./sk.js": 306,
-	"./sl": 307,
-	"./sl.js": 307,
-	"./sq": 308,
-	"./sq.js": 308,
-	"./sr": 309,
-	"./sr-cyrl": 310,
-	"./sr-cyrl.js": 310,
-	"./sr.js": 309,
-	"./ss": 311,
-	"./ss.js": 311,
-	"./sv": 312,
-	"./sv.js": 312,
-	"./sw": 313,
-	"./sw.js": 313,
-	"./ta": 314,
-	"./ta.js": 314,
-	"./te": 315,
-	"./te.js": 315,
-	"./tet": 316,
-	"./tet.js": 316,
-	"./th": 317,
-	"./th.js": 317,
-	"./tl-ph": 318,
-	"./tl-ph.js": 318,
-	"./tlh": 319,
-	"./tlh.js": 319,
-	"./tr": 320,
-	"./tr.js": 320,
-	"./tzl": 321,
-	"./tzl.js": 321,
-	"./tzm": 322,
-	"./tzm-latn": 323,
-	"./tzm-latn.js": 323,
-	"./tzm.js": 322,
-	"./uk": 324,
-	"./uk.js": 324,
-	"./ur": 325,
-	"./ur.js": 325,
-	"./uz": 326,
-	"./uz-latn": 327,
-	"./uz-latn.js": 327,
-	"./uz.js": 326,
-	"./vi": 328,
-	"./vi.js": 328,
-	"./x-pseudo": 329,
-	"./x-pseudo.js": 329,
-	"./yo": 330,
-	"./yo.js": 330,
-	"./zh-cn": 331,
-	"./zh-cn.js": 331,
-	"./zh-hk": 332,
-	"./zh-hk.js": 332,
-	"./zh-tw": 333,
-	"./zh-tw.js": 333
+	"./af": 175,
+	"./af.js": 175,
+	"./ar": 176,
+	"./ar-dz": 177,
+	"./ar-dz.js": 177,
+	"./ar-kw": 178,
+	"./ar-kw.js": 178,
+	"./ar-ly": 179,
+	"./ar-ly.js": 179,
+	"./ar-ma": 180,
+	"./ar-ma.js": 180,
+	"./ar-sa": 181,
+	"./ar-sa.js": 181,
+	"./ar-tn": 182,
+	"./ar-tn.js": 182,
+	"./ar.js": 176,
+	"./az": 183,
+	"./az.js": 183,
+	"./be": 184,
+	"./be.js": 184,
+	"./bg": 185,
+	"./bg.js": 185,
+	"./bm": 186,
+	"./bm.js": 186,
+	"./bn": 187,
+	"./bn.js": 187,
+	"./bo": 188,
+	"./bo.js": 188,
+	"./br": 189,
+	"./br.js": 189,
+	"./bs": 190,
+	"./bs.js": 190,
+	"./ca": 191,
+	"./ca.js": 191,
+	"./cs": 192,
+	"./cs.js": 192,
+	"./cv": 193,
+	"./cv.js": 193,
+	"./cy": 194,
+	"./cy.js": 194,
+	"./da": 195,
+	"./da.js": 195,
+	"./de": 196,
+	"./de-at": 197,
+	"./de-at.js": 197,
+	"./de-ch": 198,
+	"./de-ch.js": 198,
+	"./de.js": 196,
+	"./dv": 199,
+	"./dv.js": 199,
+	"./el": 200,
+	"./el.js": 200,
+	"./en-au": 201,
+	"./en-au.js": 201,
+	"./en-ca": 202,
+	"./en-ca.js": 202,
+	"./en-gb": 203,
+	"./en-gb.js": 203,
+	"./en-ie": 204,
+	"./en-ie.js": 204,
+	"./en-nz": 205,
+	"./en-nz.js": 205,
+	"./eo": 206,
+	"./eo.js": 206,
+	"./es": 207,
+	"./es-do": 208,
+	"./es-do.js": 208,
+	"./es-us": 209,
+	"./es-us.js": 209,
+	"./es.js": 207,
+	"./et": 210,
+	"./et.js": 210,
+	"./eu": 211,
+	"./eu.js": 211,
+	"./fa": 212,
+	"./fa.js": 212,
+	"./fi": 213,
+	"./fi.js": 213,
+	"./fo": 214,
+	"./fo.js": 214,
+	"./fr": 215,
+	"./fr-ca": 216,
+	"./fr-ca.js": 216,
+	"./fr-ch": 217,
+	"./fr-ch.js": 217,
+	"./fr.js": 215,
+	"./fy": 218,
+	"./fy.js": 218,
+	"./gd": 219,
+	"./gd.js": 219,
+	"./gl": 220,
+	"./gl.js": 220,
+	"./gom-latn": 221,
+	"./gom-latn.js": 221,
+	"./gu": 222,
+	"./gu.js": 222,
+	"./he": 223,
+	"./he.js": 223,
+	"./hi": 224,
+	"./hi.js": 224,
+	"./hr": 225,
+	"./hr.js": 225,
+	"./hu": 226,
+	"./hu.js": 226,
+	"./hy-am": 227,
+	"./hy-am.js": 227,
+	"./id": 228,
+	"./id.js": 228,
+	"./is": 229,
+	"./is.js": 229,
+	"./it": 230,
+	"./it.js": 230,
+	"./ja": 231,
+	"./ja.js": 231,
+	"./jv": 232,
+	"./jv.js": 232,
+	"./ka": 233,
+	"./ka.js": 233,
+	"./kk": 234,
+	"./kk.js": 234,
+	"./km": 235,
+	"./km.js": 235,
+	"./kn": 236,
+	"./kn.js": 236,
+	"./ko": 237,
+	"./ko.js": 237,
+	"./ky": 238,
+	"./ky.js": 238,
+	"./lb": 239,
+	"./lb.js": 239,
+	"./lo": 240,
+	"./lo.js": 240,
+	"./lt": 241,
+	"./lt.js": 241,
+	"./lv": 242,
+	"./lv.js": 242,
+	"./me": 243,
+	"./me.js": 243,
+	"./mi": 244,
+	"./mi.js": 244,
+	"./mk": 245,
+	"./mk.js": 245,
+	"./ml": 246,
+	"./ml.js": 246,
+	"./mr": 247,
+	"./mr.js": 247,
+	"./ms": 248,
+	"./ms-my": 249,
+	"./ms-my.js": 249,
+	"./ms.js": 248,
+	"./mt": 250,
+	"./mt.js": 250,
+	"./my": 251,
+	"./my.js": 251,
+	"./nb": 252,
+	"./nb.js": 252,
+	"./ne": 253,
+	"./ne.js": 253,
+	"./nl": 254,
+	"./nl-be": 255,
+	"./nl-be.js": 255,
+	"./nl.js": 254,
+	"./nn": 256,
+	"./nn.js": 256,
+	"./pa-in": 257,
+	"./pa-in.js": 257,
+	"./pl": 258,
+	"./pl.js": 258,
+	"./pt": 259,
+	"./pt-br": 260,
+	"./pt-br.js": 260,
+	"./pt.js": 259,
+	"./ro": 261,
+	"./ro.js": 261,
+	"./ru": 262,
+	"./ru.js": 262,
+	"./sd": 263,
+	"./sd.js": 263,
+	"./se": 264,
+	"./se.js": 264,
+	"./si": 265,
+	"./si.js": 265,
+	"./sk": 266,
+	"./sk.js": 266,
+	"./sl": 267,
+	"./sl.js": 267,
+	"./sq": 268,
+	"./sq.js": 268,
+	"./sr": 269,
+	"./sr-cyrl": 270,
+	"./sr-cyrl.js": 270,
+	"./sr.js": 269,
+	"./ss": 271,
+	"./ss.js": 271,
+	"./sv": 272,
+	"./sv.js": 272,
+	"./sw": 273,
+	"./sw.js": 273,
+	"./ta": 274,
+	"./ta.js": 274,
+	"./te": 275,
+	"./te.js": 275,
+	"./tet": 276,
+	"./tet.js": 276,
+	"./th": 277,
+	"./th.js": 277,
+	"./tl-ph": 278,
+	"./tl-ph.js": 278,
+	"./tlh": 279,
+	"./tlh.js": 279,
+	"./tr": 280,
+	"./tr.js": 280,
+	"./tzl": 281,
+	"./tzl.js": 281,
+	"./tzm": 282,
+	"./tzm-latn": 283,
+	"./tzm-latn.js": 283,
+	"./tzm.js": 282,
+	"./uk": 284,
+	"./uk.js": 284,
+	"./ur": 285,
+	"./ur.js": 285,
+	"./uz": 286,
+	"./uz-latn": 287,
+	"./uz-latn.js": 287,
+	"./uz.js": 286,
+	"./vi": 288,
+	"./vi.js": 288,
+	"./x-pseudo": 289,
+	"./x-pseudo.js": 289,
+	"./yo": 290,
+	"./yo.js": 290,
+	"./zh-cn": 291,
+	"./zh-cn.js": 291,
+	"./zh-hk": 292,
+	"./zh-hk.js": 292,
+	"./zh-tw": 293,
+	"./zh-tw.js": 293
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1388,7 +1127,322 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 427;
+webpackContext.id = 404;
+
+/***/ }),
+
+/***/ 425:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_base_app__ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers__ = __webpack_require__(58);
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var MyApp = (function (_super) {
+    __extends(MyApp, _super);
+    function MyApp(platform, api, utils) {
+        var _this = _super.call(this, platform, api, utils) || this;
+        __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].DEBUG_VERBOSE && console.log('MyApp constructor');
+        return _this;
+    }
+    // override parent
+    MyApp.prototype.onAppLoaded = function () {
+        var _this = this;
+        // set rootpage only when the app is ready
+        __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].DEBUG_VERBOSE && console.log('MyApp onAppLoaded');
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].START_PAGE;
+        // check local jwt token
+        this.utils.getLocal(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].SAVED_JWT_TOKEN_KEY, 'undefined').then(function (token) {
+            if (token !== 'undefined') {
+                console.log("found saved jwt token, going to set to the header: " + token);
+                _this.api.setJwtHeader(token);
+            }
+            else {
+                console.log("can not find saved jwt token, going to call init api");
+                _this.initApi();
+            }
+        });
+    };
+    MyApp.prototype.initApi = function () {
+        var _this = this;
+        this.utils.currentVersion().then(function (curVersion) {
+            var initParam = {
+                platform: 'android',
+                device_id: 'abcdefg',
+                version: curVersion,
+            };
+            _this.api.postInit(initParam).then(function (resp) {
+                if (resp.token) {
+                    _this.utils.setLocal(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* Config */].SAVED_JWT_TOKEN_KEY, resp.token);
+                    _this.api.setJwtHeader(resp.token);
+                }
+            });
+        });
+    };
+    MyApp = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"D:\Work\Salf\HKIaido\iaido-app\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>'/*ion-inline-end:"D:\Work\Salf\HKIaido\iaido-app\src\app\app.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */], __WEBPACK_IMPORTED_MODULE_5__providers__["a" /* Api */], __WEBPACK_IMPORTED_MODULE_4__core_providers_utils__["a" /* Utils */]])
+    ], MyApp);
+    return MyApp;
+}(__WEBPACK_IMPORTED_MODULE_2__core_base_app__["a" /* BaseApp */]));
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 426:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BaseApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(45);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+/**
+ * Base class for application, with common workflow when upon app start
+ * @Component to be defined in child classes
+ **/
+
+
+
+var BaseApp = (function () {
+    function BaseApp(platform, api, utils) {
+        var _this = this;
+        this.platform = platform;
+        this.api = api;
+        this.utils = utils;
+        __WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].DEBUG_VERBOSE && console.log('BaseApp constructor');
+        // override Android hardware back button
+        platform.registerBackButtonAction(function () {
+            // check current page name
+            var page = _this.nav.root;
+            if (!_this.nav.canGoBack() && page.name == __WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].ROOT_PAGE_NAME) {
+                // show Exit App confirmation box
+                _this.utils.showConfirm('', _this.utils.instantLang('MSG.CONFIRM_EXIT_APP'), function () {
+                    _this.platform.exitApp();
+                });
+            }
+            else {
+                // normal go back navigation
+                _this.nav.pop();
+            }
+        });
+        platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            _this.utils.setupStatusbar();
+            // JuicyLauncher setup
+            utils.setupLang();
+            utils.setupGoogleAnalytics();
+            // utils.setupOneSignal();
+            // check force or soft update
+            // this.checkVersion();
+            _this.onAppLoaded();
+        });
+    }
+    // Version checking	
+    BaseApp.prototype.checkVersion = function () {
+        // this.api.getVersions().then(data => {
+        // 	// Prepare modal or popover, based on whether need to force upgrade
+        // 	if (data) {
+        // 		if (data.force_upgrade) {
+        // 			this.utils.showModal(NewVersionPage, { version_response: data });
+        // 		} else {
+        // 			// check whether user has dismissed version upgrade notice before
+        // 			let latest_version_code: string = data.latest_version;
+        // 			let key: string = 'VERSION_CHECK_FROM_' + data.curr_version + '_TO_' + latest_version_code;
+        // 			this.utils.getLocal(key, false).then(skipped => {
+        // 				if (!skipped) {
+        // 					this.utils.showModal(NewVersionPage, { version_response: data });
+        // 				}
+        // 			});
+        // 		}
+        // 	}
+        var _this = this;
+        // 	// indicate the app is successfully loaded
+        // 	this.onAppLoaded();
+        // }).catch(err => {
+        // 	// version cannot be found from server, but still proceed to init the app
+        // 	this.onAppLoaded();
+        // });
+        this.utils.currentVersion().then(function (curVersion) {
+            var appInitParam = {
+                platform: 'android',
+                device_id: 'abc',
+                version: curVersion,
+            };
+            _this.api.postInit(appInitParam).then(function (resp) {
+                if (!resp.err_code) {
+                    if (resp.token) {
+                        _this.utils.setLocal(__WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].SAVED_JWT_TOKEN_KEY, resp.token);
+                        _this.api.setJwtHeader(resp.token);
+                        _this.onAppLoaded();
+                    }
+                    else {
+                        _this.utils.getLocal(__WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].SAVED_JWT_TOKEN_KEY, null).then(function (token) {
+                            if (token) {
+                                _this.api.setJwtHeader(token);
+                                _this.onAppLoaded();
+                            }
+                            else {
+                                _this.onAppLoaded();
+                            }
+                        });
+                    }
+                }
+                else {
+                    _this.onAppLoaded();
+                }
+            });
+        });
+    };
+    // inherit this function from child class (e.g. MyApp)
+    BaseApp.prototype.onAppLoaded = function () {
+        __WEBPACK_IMPORTED_MODULE_2__config__["a" /* Config */].DEBUG_VERBOSE && console.log('BaseApp onAppLoaded');
+    };
+    // [For App with Tab / Sidemenu root only]
+    BaseApp.prototype.openPage = function (page) {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        if (this.nav && page) {
+            this.nav.setRoot(page);
+        }
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
+    ], BaseApp.prototype, "nav", void 0);
+    return BaseApp;
+}());
+
+//# sourceMappingURL=base-app.js.map
+
+/***/ }),
+
+/***/ 427:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewVersionPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_utils__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers__ = __webpack_require__(58);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Modal page for display latest versions returned from API
+ */
+var NewVersionPage = (function () {
+    function NewVersionPage(platform, view, params, api, utils) {
+        var _this = this;
+        this.platform = platform;
+        this.view = view;
+        this.params = params;
+        this.api = api;
+        this.utils = utils;
+        this.version_response = null;
+        this.force_upgrade = false;
+        this.show_release_notes = false;
+        this.show_release_notes_icon = 'arrow-dropdown-circle';
+        console.log('NewVersionPage > params', this.params.data);
+        this.version_response = this.params.data.version_response;
+        this.force_upgrade = (this.version_response.force_upgrade) ? !!this.version_response.force_upgrade : false;
+        // disable hardware back button when force upgrade
+        console.log('NewVersionPage > force_upgrade = ' + this.force_upgrade);
+        if (this.force_upgrade) {
+            this.platform.registerBackButtonAction(function () { });
+        }
+        // get App download URL from API
+        this.api.getAppConfig().then(function (data) {
+            if (_this.utils.currentOS() == 'ios') {
+                _this.download_url = data['ios_url'];
+            }
+            else if (_this.utils.currentOS() == 'android') {
+                _this.download_url = data['android_url'];
+            }
+        });
+    }
+    // Toggle release notes
+    NewVersionPage.prototype.onClickReleaseNotes = function () {
+        this.show_release_notes = !this.show_release_notes;
+        this.show_release_notes_icon = this.show_release_notes ? 'arrow-dropup-circle' : 'arrow-dropdown-circle';
+    };
+    // Dismiss this modal / popup
+    NewVersionPage.prototype.onClickSkipBtn = function (data) {
+        var _this = this;
+        if (!this.force_upgrade) {
+            var key_1 = 'VERSION_CHECK_FROM_' + this.version_response.curr_version + '_TO_' + this.version_response.latest_version;
+            this.utils.setLocal(key_1, true).then(function () {
+                console.log('Finish setting to key: ' + key_1);
+                _this.view.dismiss(data);
+            });
+        }
+    };
+    NewVersionPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-new-version',template:/*ion-inline-start:"D:\Work\Salf\HKIaido\iaido-app\src\core\components\new-version\new-version.html"*/'<ion-content padding>\n\n	<div class="container">\n\n		<!-- logo -->\n		<!--<img src="assets/img/logo.png" />-->\n\n		<!-- description -->\n		<h5>New Version Available</h5>\n		<p>There is a newer version available for download.<br/>Please update the app to continue.</p>\n		<p>Latest Version: <strong>{{version_response.latest_version}}</strong></p>\n		<p>Current Version: <strong>{{version_response.curr_version}}</strong></p>\n		\n		<!-- release notes -->\n		<ion-list *ngIf="version_response.new_versions">\n			<ion-list-header (click)="onClickReleaseNotes()">\n				Release Notes\n				<ion-icon item-right name="{{ show_release_notes_icon }}"></ion-icon>\n			</ion-list-header>\n			<div *ngIf="show_release_notes">\n				<ion-item *ngFor="let version of version_response.new_versions">\n					<h2>Version: {{version.code}} ({{version.publish_date}})</h2>\n					<br/>\n					<div [innerHTML]="version.release_notes"></div>\n				</ion-item>\n			</div>\n		</ion-list>\n\n		<!-- force upgrade -->\n		<div *ngIf="force_upgrade">\n			<a class="download-btn" ion-button href="{{ download_url }}" target="_blank" round>Update</a>\n		</div>\n		\n		<!-- soft upgrade -->\n		<div *ngIf="!force_upgrade">\n			<a class="download-btn" ion-button *ngIf="download_url" href="{{ download_url }}" target="_blank" round>Update</a>\n			<br/>\n			<button ion-button class="skip-btn" (click)="onClickSkipBtn()" round color="light">Skip</button>\n		</div>\n\n	</div>\n\n</ion-content>'/*ion-inline-end:"D:\Work\Salf\HKIaido\iaido-app\src\core\components\new-version\new-version.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["o" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3__providers__["a" /* Api */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_utils__["a" /* Utils */]])
+    ], NewVersionPage);
+    return NewVersionPage;
+}());
+
+//# sourceMappingURL=new-version.js.map
 
 /***/ }),
 
@@ -1539,12 +1593,26 @@ var Config = (function () {
     Config.DEBUG_LOCAL_DATA = false; // Messages related to local data & storage
     Config.DEBUG_ANALYTICS = false; // Messages related to Analytics platform (e.g. Google Analytics)
     Config.DEBUG_PUSH_NOTIFICATION = false; // Messages related to push notifications (e.g. OneSignal) 
+    // Local Storage Key
+    Config.SAVED_JWT_TOKEN_KEY = 'LOCAL_JWT_TOKEN';
     return Config;
 }());
 
 //# sourceMappingURL=config.js.map
 
+/***/ }),
+
+/***/ 58:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(402);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__api__["a"]; });
+
+
+//# sourceMappingURL=index.js.map
+
 /***/ })
 
-},[334]);
+},[333]);
 //# sourceMappingURL=main.js.map
